@@ -1,4 +1,5 @@
 ﻿using API_WebApp.Data;
+using API_WebApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -14,7 +15,9 @@ builder.Services.AddControllers();
 //https://stackoverflow.com/questions/69472240/asp-net-6-identity-sqlite-services-adddbcontext-how
 var connectionString = builder.Configuration.GetConnectionString("MyDB");
 builder.Services.AddDbContext<MyDBContext>(options => options.UseSqlServer(connectionString));
-
+builder.Services.AddScoped<ILoaiRepository, LoaiRepository>();
+builder.Services.AddScoped<ILoaiRepository, LoaiRepositoryInMemory>();
+/*
 var secretKey = Configuration["AppSettings:SecretKey"];
 var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 
@@ -33,7 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ClockSkew = TimeSpan.Zero
     };
 });
-
+*/
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
