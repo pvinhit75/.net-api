@@ -17,6 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("MyDB");
 builder.Services.AddDbContext<MyDBContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<ILoaiRepository, LoaiRepository>();
 builder.Services.AddScoped<ILoaiRepository, LoaiRepositoryInMemory>();
+builder.Services.AddScoped<IHangHoaRepository, HangHoaRepository>();
 /*
 var secretKey = Configuration["AppSettings:SecretKey"];
 var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
